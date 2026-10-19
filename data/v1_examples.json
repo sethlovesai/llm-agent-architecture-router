@@ -1,0 +1,238 @@
+{
+  "built_utc": "2026-10-16T07:48:55Z",
+  "note": "Benchmark examples are IN-SAMPLE (part of the 24 tasks the model was fitted on).",
+  "examples": [
+    {
+      "key": "bench_900002",
+      "label": "Flag accounts with an open support case AND a recent order",
+      "origin": "benchmark_in_sample",
+      "task_id": 900002,
+      "category": "dual_signal_account_flagging",
+      "description": "Which accounts currently have both at least one unresolved support case and at least one order in the last 90 days? For each matching account, return the unresolved case count and most recent order date/status.",
+      "decomposition_warranted": true,
+      "subtasks": [
+        {
+          "id": "1",
+          "role": "Retriever",
+          "description": "Retrieve, for each account with at least one unresolved Case (ClosedDate is null), the AccountId and its unresolved case count.",
+          "depends_on": []
+        },
+        {
+          "id": "2",
+          "role": "Retriever",
+          "description": "Retrieve, for each account with at least one Order in the last 90 days, the AccountId and that account's most recent order date and status.",
+          "depends_on": []
+        },
+        {
+          "id": "3",
+          "role": "Analyst",
+          "description": "Determine which AccountIds appear in both Subtask 1 and Subtask 2's results, and for each matching account, combine its unresolved case count with its most recent order date/status.",
+          "depends_on": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "4",
+          "role": "Responder",
+          "description": "Format the final response listing each matching account with its unresolved case count and most recent order date/status.",
+          "depends_on": [
+            "3"
+          ]
+        }
+      ],
+      "source": "decomposition/cache/900002.json",
+      "source_sha256": "c6449ebd314329dae3ddc9b8e5455fe29af7424b7b6539084165a610d27ae3dc",
+      "stored_features_for_provenance_only": {
+        "parallelism_width": 2,
+        "critical_path_depth": 3,
+        "coupling_density": 0.5
+      }
+    },
+    {
+      "key": "bench_89",
+      "label": "Qualify a lead (BANT check)",
+      "origin": "benchmark_in_sample",
+      "task_id": 89,
+      "category": "lead_qualification",
+      "description": "Should we qualify this lead based on their recent discussions? If not, is it due to 'Budget', 'Authority', 'Need', or 'Timeline'? Return only one or several of the four BANT factors that the lead qualification fails to meet (i.e. 'Budget', 'Authority', 'Need', 'Timeline').",
+      "decomposition_warranted": true,
+      "subtasks": [
+        {
+          "id": "1",
+          "role": "Retriever",
+          "description": "Retrieve the lead's record including notes and activity history related to recent discussions.",
+          "depends_on": []
+        },
+        {
+          "id": "2",
+          "role": "Analyst",
+          "description": "Check Need based on the lead's recent discussions.",
+          "depends_on": [
+            "1"
+          ]
+        },
+        {
+          "id": "3",
+          "role": "Analyst",
+          "description": "Check Budget based on the lead's recent discussions.",
+          "depends_on": [
+            "1"
+          ]
+        },
+        {
+          "id": "4",
+          "role": "Analyst",
+          "description": "Check Authority based on the lead's recent discussions.",
+          "depends_on": [
+            "1"
+          ]
+        },
+        {
+          "id": "5",
+          "role": "Analyst",
+          "description": "Check Timeline based on the lead's recent discussions.",
+          "depends_on": [
+            "1"
+          ]
+        },
+        {
+          "id": "6",
+          "role": "Responder",
+          "description": "Synthesize and respond with the BANT factors that the lead qualification fails to meet.",
+          "depends_on": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        }
+      ],
+      "source": "decomposition/cache/89.json",
+      "source_sha256": "2581ce2ed57beb8281228407dec14d7c5b99ff472eb0aa553c33fb832977d315",
+      "stored_features_for_provenance_only": {
+        "parallelism_width": 4,
+        "critical_path_depth": 3,
+        "coupling_density": 0.5333
+      }
+    },
+    {
+      "key": "bench_2056",
+      "label": "Find the agent with the fastest sales cycle",
+      "origin": "benchmark_in_sample",
+      "task_id": 2056,
+      "category": "sales_cycle_understanding",
+      "description": "Determine which agent had the lowest average time to close opportunities over the last three quarters. Return only the Id of the agent.",
+      "decomposition_warranted": true,
+      "subtasks": [
+        {
+          "id": "1",
+          "role": "Retriever",
+          "description": "Retrieve opportunity records for all agents over the last three quarters, including open and close dates.",
+          "depends_on": []
+        },
+        {
+          "id": "2",
+          "role": "Analyst",
+          "description": "Compute average time to close opportunities for each agent based on the retrieved records.",
+          "depends_on": [
+            "1"
+          ]
+        },
+        {
+          "id": "3",
+          "role": "Analyst",
+          "description": "Identify the agent with the lowest average time to close opportunities.",
+          "depends_on": [
+            "2"
+          ]
+        },
+        {
+          "id": "4",
+          "role": "Responder",
+          "description": "Format the final response to return only the Id of the agent with the lowest average time.",
+          "depends_on": [
+            "3"
+          ]
+        }
+      ],
+      "source": "decomposition/cache/2056.json",
+      "source_sha256": "c2032afc5b921b4400ce8a630ea984ff517d2f47c52e11e2555473f49f3cef3f",
+      "stored_features_for_provenance_only": {
+        "parallelism_width": 1,
+        "critical_path_depth": 4,
+        "coupling_density": 0.5
+      }
+    },
+    {
+      "key": "bench_722",
+      "label": "Answer a knowledge-base question",
+      "origin": "benchmark_in_sample",
+      "task_id": 722,
+      "category": "knowledge_qa",
+      "description": "What is the purpose of the Summer Road Trip Service?",
+      "decomposition_warranted": false,
+      "subtasks": [
+        {
+          "id": "1",
+          "role": "Retriever",
+          "description": "Search knowledge base for the purpose of the Summer Road Trip Service and respond.",
+          "depends_on": []
+        }
+      ],
+      "source": "decomposition/cache/722.json",
+      "source_sha256": "cc509cc26a2b66417167bb8ad43d70137e5e836bfdc4200e4a67d79522bc641e",
+      "stored_features_for_provenance_only": null
+    },
+    {
+      "key": "illus_w3",
+      "label": "Customer health check across three data sources",
+      "origin": "illustrative",
+      "task_id": null,
+      "category": null,
+      "description": "For a given customer account, check its open support cases, its orders in the last six months and its latest satisfaction survey score, then summarise whether the account needs attention.",
+      "decomposition_warranted": true,
+      "subtasks": [
+        {
+          "id": "1",
+          "role": "Retriever",
+          "description": "Retrieve the account's open support cases.",
+          "depends_on": []
+        },
+        {
+          "id": "2",
+          "role": "Retriever",
+          "description": "Retrieve the account's orders from the last six months.",
+          "depends_on": []
+        },
+        {
+          "id": "3",
+          "role": "Retriever",
+          "description": "Retrieve the account's latest satisfaction survey score.",
+          "depends_on": []
+        },
+        {
+          "id": "4",
+          "role": "Analyst",
+          "description": "Combine the three results and judge whether the account needs attention.",
+          "depends_on": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "id": "5",
+          "role": "Responder",
+          "description": "Write a short summary with the judgement and the evidence.",
+          "depends_on": [
+            "4"
+          ]
+        }
+      ],
+      "source": "authored for the prototype (hand-written DAG; not produced by the decomposition module, not evaluated)",
+      "source_sha256": null,
+      "stored_features_for_provenance_only": null
+    }
+  ]
+}

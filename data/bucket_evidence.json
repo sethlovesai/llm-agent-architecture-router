@@ -1,0 +1,74 @@
+{
+  "source": "decomposition/cache/*.json (read-only)",
+  "n_cache_files": 24,
+  "sha256_of_concatenated_cache_files_sorted_by_name": "4265520f7ae28be7f99019b27ca3f0a488893743381bda92d84758908cf2d48c",
+  "built_utc": "2026-10-15T13:37:05Z",
+  "widths": {
+    "1": {
+      "task_ids": [
+        122,
+        125,
+        334,
+        348,
+        421,
+        446,
+        672,
+        722,
+        792,
+        1030,
+        1089,
+        1463,
+        1563,
+        1624,
+        1654,
+        1857,
+        1914,
+        1936,
+        1942,
+        2056
+      ],
+      "categories": [
+        "best_region_identification",
+        "case_routing",
+        "conversion_rate_comprehension",
+        "internal_operation_data",
+        "invalid_config",
+        "knowledge_qa",
+        "monthly_trend_analysis",
+        "named_entity_disambiguation",
+        "policy_violation_identification",
+        "private_customer_information",
+        "quote_approval",
+        "sales_amount_understanding",
+        "sales_cycle_understanding",
+        "sales_insight_mining",
+        "top_issue_identification"
+      ],
+      "n_tasks": 20,
+      "n_categories": 15
+    },
+    "4": {
+      "task_ids": [
+        36,
+        89
+      ],
+      "categories": [
+        "lead_qualification"
+      ],
+      "n_tasks": 2,
+      "n_categories": 1
+    },
+    "2": {
+      "task_ids": [
+        900001,
+        900002
+      ],
+      "categories": [
+        "churn_risk_assessment",
+        "dual_signal_account_flagging"
+      ],
+      "n_tasks": 2,
+      "n_categories": 2
+    }
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "recorded_utc": "2026-10-18T14:41:00Z",
+  "note": "LLM-generated with live_decompose.generate() (research prompt and validation, gpt-4o-mini, temperature 0). NOT benchmark tasks and NOT evaluated; used as an offline demo fallback.",
+  "examples": [
+    {
+      "key": "rec_complaint_renewal",
+      "label": "Retention note for complaining customers with a renewal due",
+      "origin": "recorded_llm_generated",
+      "generation": {
+        "input_hash": "05b03d775167342c3352846549b9eb43ce28bbeef3bb45378c934cf2239bd654",
+        "task_text": "Find customers who opened a complaint case in the last 30 days and also have a contract renewal due in the next 60 days, and draft a short retention note for each one.",
+        "context_text": "",
+        "context_included": false,
+        "composed_query": "Find customers who opened a complaint case in the last 30 days and also have a contract renewal due in the next 60 days, and draft a short retention note for each one.",
+        "decomposition_warranted": true,
+        "subtasks": [
+          {
+            "id": "1",
+            "description": "Retrieve customers who opened a complaint case in the last 30 days, including their customer ID and case details.",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "2",
+            "description": "Retrieve customers who have a contract renewal due in the next 60 days, including their customer ID and renewal details.",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "3",
+            "description": "Determine which customers appear in both Subtask 1 and Subtask 2's results, and prepare a list of these customers.",
+            "depends_on": [
+              "1",
+              "2"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "4",
+            "description": "Draft a short retention note for each customer identified in Subtask 3.",
+            "depends_on": [
+              "3"
+            ],
+            "role": "Responder"
+          }
+        ],
+        "features": {
+          "parallelism_width": 2,
+          "critical_path_depth": 3,
+          "coupling_density": 0.5
+        },
+        "width": 2,
+        "width_checks": {
+          "research_compute_features": 2,
+          "prototype_dag_width": 2,
+          "agree": true,
+          "meaning": "Two independent width calculations agree on this DAG. This confirms the width is computed consistently for this DAG; it does not show that the LLM's decomposition is correct."
+        },
+        "depth": 3,
+        "model": "gpt-4o-mini",
+        "temperature": 0.0,
+        "max_retries": 3,
+        "attempts": 1,
+        "cost_usd": 0.0002838,
+        "timestamp_utc": "2026-10-18T14:40:50Z",
+        "decompose_sha256": "4bcf6602accbab788cbf2916e45e8dc3fa7f4539c99f8b06228c058ae80c455b",
+        "decompose_commit": "1e7e83b",
+        "provenance": "LLM-generated, not evaluated",
+        "notes": [
+          "Custom tasks have no benchmark category, so the research code's category-based privacy refusal-check injection is not applied."
+        ]
+      }
+    },
+    {
+      "key": "rec_bant_new_lead",
+      "label": "Qualify a new inbound lead",
+      "origin": "recorded_llm_generated",
+      "generation": {
+        "input_hash": "d517f5d13220fee23b1051834c396f79f15676e3d640a729ce5cb255b9e0e562",
+        "task_text": "Decide whether to qualify a new inbound lead by checking their budget, their decision-making authority, their stated need and their purchase timeline from the emails and call notes we have.",
+        "context_text": "",
+        "context_included": false,
+        "composed_query": "Decide whether to qualify a new inbound lead by checking their budget, their decision-making authority, their stated need and their purchase timeline from the emails and call notes we have.",
+        "decomposition_warranted": true,
+        "subtasks": [
+          {
+            "id": "1",
+            "description": "Retrieve the lead's email and call notes to assess BANT criteria (Budget, Authority, Need, Timeline)",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "2",
+            "description": "Check Need based on retrieved notes",
+            "depends_on": [
+              "1"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "3",
+            "description": "Check Budget based on retrieved notes",
+            "depends_on": [
+              "1"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "4",
+            "description": "Check Authority based on retrieved notes",
+            "depends_on": [
+              "1"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "5",
+            "description": "Check Timeline based on retrieved notes",
+            "depends_on": [
+              "1"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "6",
+            "description": "Synthesize and respond with the results of the BANT criteria checks",
+            "depends_on": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "role": "Responder"
+          }
+        ],
+        "features": {
+          "parallelism_width": 4,
+          "critical_path_depth": 3,
+          "coupling_density": 0.5333
+        },
+        "width": 4,
+        "width_checks": {
+          "research_compute_features": 4,
+          "prototype_dag_width": 4,
+          "agree": true,
+          "meaning": "Two independent width calculations agree on this DAG. This confirms the width is computed consistently for this DAG; it does not show that the LLM's decomposition is correct."
+        },
+        "depth": 3,
+        "model": "gpt-4o-mini",
+        "temperature": 0.0,
+        "max_retries": 3,
+        "attempts": 1,
+        "cost_usd": 0.0003057,
+        "timestamp_utc": "2026-10-18T14:40:54Z",
+        "decompose_sha256": "4bcf6602accbab788cbf2916e45e8dc3fa7f4539c99f8b06228c058ae80c455b",
+        "decompose_commit": "1e7e83b",
+        "provenance": "LLM-generated, not evaluated",
+        "notes": [
+          "Custom tasks have no benchmark category, so the research code's category-based privacy refusal-check injection is not applied."
+        ]
+      }
+    },
+    {
+      "key": "rec_delivery_summary",
+      "label": "Summarise delivery-delay cases",
+      "origin": "recorded_llm_generated",
+      "generation": {
+        "input_hash": "b22b83b65a84d76ad7da9952eb7734bd4afb1ad4843c045c4d49e2c58e64715f",
+        "task_text": "Summarise the most common reasons customers gave in support cases about delivery delays this month.",
+        "context_text": "",
+        "context_included": false,
+        "composed_query": "Summarise the most common reasons customers gave in support cases about delivery delays this month.",
+        "decomposition_warranted": true,
+        "subtasks": [
+          {
+            "id": "1",
+            "description": "Retrieve support cases related to delivery delays from this month, including customer feedback and reasons provided.",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "2",
+            "description": "Analyze the retrieved support cases to identify and summarize the most common reasons given by customers for delivery delays.",
+            "depends_on": [
+              "1"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "3",
+            "description": "Format the summary of common reasons for delivery delays to respond to the query.",
+            "depends_on": [
+              "2"
+            ],
+            "role": "Responder"
+          }
+        ],
+        "features": {
+          "parallelism_width": 1,
+          "critical_path_depth": 3,
+          "coupling_density": 0.6667
+        },
+        "width": 1,
+        "width_checks": {
+          "research_compute_features": 1,
+          "prototype_dag_width": 1,
+          "agree": true,
+          "meaning": "Two independent width calculations agree on this DAG. This confirms the width is computed consistently for this DAG; it does not show that the LLM's decomposition is correct."
+        },
+        "depth": 3,
+        "model": "gpt-4o-mini",
+        "temperature": 0.0,
+        "max_retries": 3,
+        "attempts": 1,
+        "cost_usd": 0.00024615,
+        "timestamp_utc": "2026-10-18T14:40:57Z",
+        "decompose_sha256": "4bcf6602accbab788cbf2916e45e8dc3fa7f4539c99f8b06228c058ae80c455b",
+        "decompose_commit": "1e7e83b",
+        "provenance": "LLM-generated, not evaluated",
+        "notes": [
+          "Custom tasks have no benchmark category, so the research code's category-based privacy refusal-check injection is not applied."
+        ]
+      }
+    },
+    {
+      "key": "rec_region_pipeline",
+      "label": "Compare pipeline with last quarter's revenue by region (with context)",
+      "origin": "recorded_llm_generated",
+      "generation": {
+        "input_hash": "a9b5a768c6201fd77a2dfde004d299e63ed0ce7a752e2a61ca9b3386cb357a23",
+        "task_text": "For each sales region, compare this quarter's open opportunity pipeline with last quarter's closed-won revenue and flag the regions whose pipeline is below last quarter's revenue.",
+        "context_text": "Regions are the values of the Account BillingState field; 'closed-won' means Opportunity StageName = 'Closed Won'.",
+        "context_included": true,
+        "composed_query": "For each sales region, compare this quarter's open opportunity pipeline with last quarter's closed-won revenue and flag the regions whose pipeline is below last quarter's revenue.\n\nAdditional context provided by the user:\nRegions are the values of the Account BillingState field; 'closed-won' means Opportunity StageName = 'Closed Won'.",
+        "decomposition_warranted": true,
+        "subtasks": [
+          {
+            "id": "1",
+            "description": "Retrieve the total open opportunity pipeline for each sales region for this quarter (Opportunity StageName = 'Open')",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "2",
+            "description": "Retrieve the total closed-won revenue for each sales region for last quarter (Opportunity StageName = 'Closed Won')",
+            "depends_on": [],
+            "role": "Retriever"
+          },
+          {
+            "id": "3",
+            "description": "Compare this quarter's open opportunity pipeline with last quarter's closed-won revenue for each region and flag regions where the pipeline is below last quarter's revenue",
+            "depends_on": [
+              "1",
+              "2"
+            ],
+            "role": "Analyst"
+          },
+          {
+            "id": "4",
+            "description": "Format the final response listing the flagged regions",
+            "depends_on": [
+              "3"
+            ],
+            "role": "Responder"
+          }
+        ],
+        "features": {
+          "parallelism_width": 2,
+          "critical_path_depth": 3,
+          "coupling_density": 0.5
+        },
+        "width": 2,
+        "width_checks": {
+          "research_compute_features": 2,
+          "prototype_dag_width": 2,
+          "agree": true,
+          "meaning": "Two independent width calculations agree on this DAG. This confirms the width is computed consistently for this DAG; it does not show that the LLM's decomposition is correct."
+        },
+        "depth": 3,
+        "model": "gpt-4o-mini",
+        "temperature": 0.0,
+        "max_retries": 3,
+        "attempts": 1,
+        "cost_usd": 0.000288,
+        "timestamp_utc": "2026-10-18T14:41:00Z",
+        "decompose_sha256": "4bcf6602accbab788cbf2916e45e8dc3fa7f4539c99f8b06228c058ae80c455b",
+        "decompose_commit": "1e7e83b",
+        "provenance": "LLM-generated, not evaluated",
+        "notes": [
+          "Custom tasks have no benchmark category, so the research code's category-based privacy refusal-check injection is not applied.",
+          "Context included: the decomposer received the task text plus user-supplied context. The research decompositions used the task text only, so this input differs from the research setting."
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# Runtime dependencies for app_v2.py (Python 3.12). Pinned to the versions the prototype was tested with.
+numpy==2.0.1
+streamlit==1.66.0
+pandas==3.0.6
+litellm==1.67.2
+networkx==3.5
