@@ -1,9 +1,3 @@
-"""v2: CRM task (+ optional context) -> LLM-generated DAG -> validated width -> user confirmation -> Bayesian router.
-
-Run:  cd prototype && .venv_v2/bin/streamlit run app_v2.py
-The router (router_adapter.py + data/bucket_model.json) and the v1 modules are reused unchanged. The research
-decomposer is loaded only when "Generate DAG" is pressed (live_decompose.py); nothing is written to disk.
-"""
 import os
 
 import pandas as pd

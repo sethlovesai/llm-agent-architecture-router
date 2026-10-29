@@ -1,4 +1,3 @@
-"""Deterministic plain-English explanation of a router_adapter.recommend() result (no LLM)."""
 import numpy as np
 
 NAMES = {"single_agent": "Single-Agent", "workflow": "Workflow", "multi_agent": "Multi-Agent"}

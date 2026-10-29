@@ -1,9 +1,3 @@
-"""Recorded LLM-generated demonstration examples (offline fallback; no API call at runtime).
-
-data/v2_recorded_examples.json is produced once by tools/record_v2_examples.py with the same live_decompose.generate()
-used by the app. Selecting a recorded example loads its task text and context into the custom path and attaches its
-stored generation exactly as if it had just been generated; the user still has to confirm a width.
-"""
 import json
 import os
 

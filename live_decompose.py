@@ -1,22 +1,3 @@
-"""
-live_decompose.py -- the ONLY bridge from the prototype to the research decomposer.
-
-It reuses the frozen research code in decomposition/decompose.py WITHOUT modifying it:
-  SYSTEM_PROMPT, _decompose_with_retries (prompt, model, temperature 0, JSON mode, 3 attempts with
-  error feedback, _normalize_ids + _validate_and_build), compute_features, DecompositionError.
-It never calls decompose_task (that function writes into decomposition/cache/), never writes any file,
-and never reads, prints or stores the API key.
-
-Safety measures applied before the research module is imported (it imports litellm at module level):
-  * LITELLM_MODE=PRODUCTION       -> litellm skips dotenv.load_dotenv() (in DEV mode it would load a .env file)
-  * LITELLM_LOCAL_MODEL_COST_MAP  -> litellm uses its bundled price table instead of downloading it at import
-  * sys.dont_write_bytecode       -> no __pycache__ is written next to decompose.py
-  * sha256 pin of decompose.py    -> the live path refuses to run if the research file has changed
-
-Width is computed twice, independently: research compute_features (networkx) and prototype
-dag_width.router_width (pure Python). They must agree or the result is rejected. Agreement means the
-width of THIS DAG is computed consistently; it says nothing about whether the LLM's decomposition is correct.
-"""
 import datetime
 import hashlib
 import importlib.util

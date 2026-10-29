@@ -1,18 +1,3 @@
-"""Task-input state machine for app_v1.py, kept free of Streamlit so the transitions can be tested.
-
-`state` is any mutable mapping (st.session_state in the app, a dict in tests). Keys:
-  example         selected option: an example key or CUSTOM
-  task_text       current text in the description box
-  source_example  key of the example whose stored DAG is attached, or None (custom/edited text)
-  width_choice    custom-width selector value (None = nothing selected)
-  confirmed_width custom width confirmed by an explicit action, or None
-  confirmed_text  the text the custom width was confirmed for
-  rec_requested   whether the user has asked for a recommendation
-  edited_from     example key the current custom text was edited from (display only)
-
-Text NEVER influences width or the router: the only inputs to the recommendation are the effective width
-(from a stored DAG, or an explicitly confirmed manual width) and lambda.
-"""
 import json
 import os
 

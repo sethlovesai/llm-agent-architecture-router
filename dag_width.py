@@ -1,13 +1,3 @@
-"""Pure-Python DAG width (no networkx, no decomposition-module import).
-
-Re-implements the research definition read from decomposition/decompose.py (read-only):
-  * graph: one node per subtask (ALL roles count, including Analyst refusal checks and the final
-    Responder); an edge dep -> subtask for every entry in `depends_on`  (_build_graph, decompose.py:100-112)
-  * parallelism_width = size of the largest antichain: the largest set of subtasks with no dependency
-    path between any pair, computed on the transitive closure      (compute_features, decompose.py:247-282)
-  * features are only computed when decomposition_warranted is true; an undecomposed task has no
-    features and the router treats it as width 1 (decompose.py:360; router.py load_tasks)
-"""
 from itertools import combinations
 
 

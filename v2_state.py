@@ -1,13 +1,3 @@
-"""V2 session state: v1's example/manual flow plus an LLM-generated DAG source.
-
-Wraps v1_state (unchanged). Extra keys in `state` (st.session_state in the app, a dict in tests):
-  context_text   optional user context (used only for custom tasks)
-  v2_generations {input_hash: Generation dict}   all generations made in this session (memory only)
-  v2_history     [{"input_hash", "width", "timestamp_utc"}] for the CURRENT input (regenerations)
-  v2_current     input_hash of the generation attached to the current input, or None
-  v2_confirmed   {"width", "source": "generated" | "manual override", "input_hash", "generated_width"} or None
-Nothing is written to disk.
-"""
 import live_decompose as ld
 import v1_state as vs
 

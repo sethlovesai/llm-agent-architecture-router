@@ -1,20 +1,3 @@
-"""
-router_adapter.py -- standalone re-implementation (ADAPTER mode) of the width-only router's
-recommendation step from router_dist.py, driven by the frozen model in data/bucket_model.json.
-
-It does NOT import router_dist.py (see DECISIONS.md for why). Every formula below duplicates a
-specific piece of router_dist.py; the line references are to router_dist.py at commit a2fce62:
-
-  posterior mean / SD / Beta params ... Bucket.mu / .sd / .alpha / .beta     (router_dist.py:88-110)
-  empty-bucket fallback ............... BetaBucketModel.posterior            (router_dist.py:155-158)
-  utility, exact-tie rule, tie-break .. decide                               (router_dist.py:161-165)
-  Monte Carlo draws (5000, fixed seed)  simulate                             (router_dist.py:168-175)
-  P(best), 95% gap interval, flags .... task_record                          (router_dist.py:178-207)
-
-This is a recommendation-only tool: it takes a DAG width and a cost weight lambda and returns the
-architecture the router would recommend. It does not run any architecture, decompose any task, or
-call any model or API.
-"""
 import json
 import math
 import os
