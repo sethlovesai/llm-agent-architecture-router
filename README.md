@@ -27,7 +27,7 @@ works with the benchmark examples, the recorded generated examples and manual wi
 
 ## Deploy on Streamlit Community Cloud
 1. Push this repo to GitHub (private is fine) and connect it at share.streamlit.io → **Create app**.
-2. **Main file path:** `app_v2.py`. **Branch:** `main`.
+2. **Main file path:** `app_v2.py`. **Branch:** `clean-submission`.
 3. **Advanced settings → Python version: 3.12** (numpy 2.0.1 has no wheels for newer Pythons).
 4. **Advanced settings → Secrets:** paste, as a top-level key (no `[section]`, so it is also exposed as an
    environment variable, which is how the app reads it):
